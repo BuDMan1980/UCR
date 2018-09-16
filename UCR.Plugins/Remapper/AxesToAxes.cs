@@ -1,5 +1,4 @@
-﻿using System;
-using HidWizards.UCR.Core.Attributes;
+﻿using HidWizards.UCR.Core.Attributes;
 using HidWizards.UCR.Core.Models;
 using HidWizards.UCR.Core.Models.Binding;
 using HidWizards.UCR.Core.Utilities;
@@ -52,9 +51,9 @@ namespace HidWizards.UCR.Plugins.Remapper
             _linearSenstitivityScaleFactor = ((double)Sensitivity / 100);
         }
 
-        public override void Update(params long[] values)
+        public override void Update(params short[] values)
         {
-            var outputValues = new short[] {(short) values[0], (short) values[1]};
+            var outputValues = values;
             if (DeadZone != 0)
             {
                 if (CircularDz)
@@ -85,14 +84,8 @@ namespace HidWizards.UCR.Plugins.Remapper
                 }
             }
 
-            //var outputValues = new short[2];
-            outputValues[0] = Functions.ClampAxisRange((int) outputValues[0]);
-            outputValues[1] = Functions.ClampAxisRange((int) outputValues[1]);
-
             if (InvertX) outputValues[0] = Functions.Invert(outputValues[0]);
             if (InvertY) outputValues[1] = Functions.Invert(outputValues[1]);
-
-
 
             WriteOutput(0, outputValues[0]);
             WriteOutput(1, outputValues[1]);

@@ -32,10 +32,10 @@ namespace HidWizards.UCR.Plugins.Remapper
             DeadZone = 0;
         }
 
-        public override void Update(params long[] values)
+        public override void Update(params short[] values)
         {
-            var valueHigh = (short)values[0];
-            var valueLow = (short)values[1];
+            var valueHigh = values[0];
+            var valueLow = values[1];
             short valueOutput;
 
             if (InvertHigh) valueHigh = Functions.Invert(valueHigh);

@@ -48,7 +48,7 @@ namespace HidWizards.UCR.Plugins.Remapper
             SetAbsoluteTimerState(false);
         }
 
-        public override void Update(params long[] values)
+        public override void Update(params short[] values)
         {
             short value;
             if (values[1] == 1)

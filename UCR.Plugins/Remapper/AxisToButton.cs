@@ -26,9 +26,9 @@ namespace HidWizards.UCR.Plugins.Remapper
             DeadZone = 30;
         }
 
-        public override void Update(params long[] values)
+        public override void Update(params short[] values)
         {
-            var value = (short)values[0];
+            var value = values[0];
             if (Invert) value = Functions.Invert(value);
             var sign = Math.Sign(_deadZoneHelper.ApplyRangeDeadZone(value));
             switch (sign)

@@ -28,9 +28,9 @@ namespace HidWizards.UCR.Plugins.Remapper
             Range = 100;
         }
 
-        public override void Update(params long[] values)
+        public override void Update(params short[] values)
         {
-            var value = (short)values[0];
+            var value = values[0];
 
             if (InvertInput) value = (short) (1 - value);
 

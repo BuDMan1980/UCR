@@ -16,7 +16,7 @@ namespace HidWizards.UCR.Plugins.State
         [PluginGui("State", ColumnOrder = 0, RowOrder = 0)]
         public Guid StateGuid { get; set; }
 
-        public override void Update(params long[] values)
+        public override void Update(params short[] values)
         {
             long value;
             if (Invert)

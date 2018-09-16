@@ -40,7 +40,7 @@ namespace HidWizards.UCR.Plugins.Remapper
             _longHeld = true;
         }
 
-        public override void Update(params long[] values)
+        public override void Update(params short[] values)
         {
             var value = values[0];
             var pressed = value == 1;

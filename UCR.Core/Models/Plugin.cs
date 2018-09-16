@@ -104,7 +104,7 @@ namespace HidWizards.UCR.Core.Models
 
         }
 
-        public virtual void Update(params long[] values)
+        public virtual void Update(params short[] values)
         {
 
         }

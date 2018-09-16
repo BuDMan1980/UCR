@@ -37,7 +37,7 @@ namespace HidWizards.UCR.Core.Models.Binding
         public DeviceBindingCategory DeviceBindingCategory { get; set; }
 
 
-        public delegate void ValueChanged(long value);
+        public delegate void ValueChanged(short value);
         
         private ValueChanged _callback;
 
@@ -54,9 +54,9 @@ namespace HidWizards.UCR.Core.Models.Binding
         [XmlIgnore]
         public ValueChanged OutputSink { get; set; }
 
-        private long _currentValue;
+        private short _currentValue;
         [XmlIgnore]
-        public long CurrentValue
+        public short CurrentValue
         {
             get => _currentValue;
             set
@@ -129,13 +129,13 @@ namespace HidWizards.UCR.Core.Models.Binding
             }
         }
 
-        public void WriteOutput(long value)
+        public void WriteOutput(short value)
         {
             CurrentValue = value;
             OutputSink?.Invoke(value);
         }
 
-        private void InputChanged(long value)
+        private void InputChanged(short value)
         {
             CurrentValue = value;
             _callback(value);

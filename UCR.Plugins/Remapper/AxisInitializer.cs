@@ -18,7 +18,7 @@ namespace HidWizards.UCR.Plugins.Remapper
         {
         }
 
-        public override void Update(params long[] values)
+        public override void Update(params short[] values)
         {
         }
 

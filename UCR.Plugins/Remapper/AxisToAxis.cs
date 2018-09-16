@@ -33,9 +33,9 @@ namespace HidWizards.UCR.Plugins.Remapper
             Sensitivity = 100;
         }
 
-        public override void Update(params long[] values)
+        public override void Update(params short[] values)
         {
-            var value = (short)values[0];
+            var value = values[0];
             if (Invert) value = Functions.Invert(value);
             if (DeadZone != 0) value = _deadZoneHelper.ApplyRangeDeadZone(value);
             if (Sensitivity != 100) value = _sensitivityHelper.ApplyRangeSensitivity(value);

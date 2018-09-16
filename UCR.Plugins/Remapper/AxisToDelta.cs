@@ -46,9 +46,9 @@ namespace HidWizards.UCR.Plugins.Remapper
         }
 
         #region Input Processing
-        public override void Update(params long[] values)
+        public override void Update(params short[] values)
         {
-            var value = (short)values[0];
+            var value = values[0];
             if (value != 0) value = _deadZoneHelper.ApplyRangeDeadZone(value);
             if (Invert) value = Functions.Invert(value);
             if (Sensitivity != 100) value = _sensitivityHelper.ApplyRangeSensitivity(value);

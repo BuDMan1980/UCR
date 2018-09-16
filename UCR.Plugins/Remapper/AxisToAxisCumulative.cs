@@ -53,9 +53,9 @@ namespace HidWizards.UCR.Plugins.Remapper
             _relativeThread = new Thread(RelativeThread);
         }
 
-        public override void Update(params long[] values)
+        public override void Update(params short[] values)
         {
-            var value = (short)values[0];
+            var value = values[0];
 
             if (Invert) value = Functions.Invert(value);
             if (DeadZone != 0) value = _deadZoneHelper.ApplyRangeDeadZone(value);
