@@ -24,9 +24,8 @@ namespace HidWizards.UCR.Plugins.Remapper
 
         private void Initialize()
         {
-            var value = (long)((Percentage / 100) * Constants.AxisMaxAbsValue);
-            value = Functions.ClampAxisRange(value);
-            WriteOutput(0, value);
+            var value = (int)((Percentage / 100) * Constants.AxisMaxAbsValue);
+            WriteOutput(0, Functions.ClampAxisRange(value));
         }
 
         #region Event Handling

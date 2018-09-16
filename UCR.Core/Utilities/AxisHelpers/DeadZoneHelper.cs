@@ -43,20 +43,21 @@ namespace HidWizards.UCR.Core.Utilities.AxisHelpers
             }
         }
 
-        public long ApplyRangeDeadZone(long value)
+        public short ApplyRangeDeadZone(short value)
         {
-            var absValue = Math.Abs(value);
+            var absValue = (int) value;
+            absValue = Math.Abs(absValue);
             if (absValue < Math.Round(_deadzoneCutoff))
             {
                 return 0;
             }
 
             var sign = Math.Sign(value);
-            var adjustedValue = (absValue - _deadzoneCutoff) * _scaleFactor;
-            var newValue = (long) Math.Round(adjustedValue * sign);
+            var adjustedValue = (int)Math.Round((absValue - _deadzoneCutoff) * _scaleFactor);
+            var newValue = adjustedValue * sign;
             if (newValue == -32769) newValue = -32768;
             //Debug.WriteLine($"Pre-DZ: {value}, Post-DZ: {newValue}, Cutoff: {_deadzoneCutoff}");
-            return newValue;
+            return (short) newValue;
         }
     }
 }

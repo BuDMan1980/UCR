@@ -30,21 +30,22 @@ namespace HidWizards.UCR.Plugins.Remapper
 
         public override void Update(params long[] values)
         {
-            var value = values[0];
+            var value = (short)values[0];
 
-            if (InvertInput) value = 1 - value;
+            if (InvertInput) value = (short) (1 - value);
 
             // ToDo: Review logic, move off into Utilities and unit test
             if (Absolute)
             {
-                value = (long)(Constants.AxisMinValue + value * Constants.AxisMaxValue * 2 * (Range / 100.0));
+                value = Functions.ClampAxisRange((int) (Constants.AxisMinValue + value * Constants.AxisMaxValue * 2 * (Range / 100.0)));
                 if (Invert) value = Functions.Invert(value);
                 WriteOutput(0, value);
             }
             else
             {
                 var inverse = value == 0 ^ Invert;
-                WriteOutput(0, value * (long)((inverse ? Constants.AxisMinValue : Constants.AxisMaxValue) * (Range / 100.0)));
+                value = Functions.ClampAxisRange((int) ((inverse ? Constants.AxisMinValue : Constants.AxisMaxValue) * (Range / 100.0)));
+                WriteOutput(0, value);
             }
         }
 

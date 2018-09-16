@@ -17,11 +17,11 @@ namespace HidWizards.UCR.Plugins.Remapper
         {
             if (Invert)
             {
-                WriteOutput(0, values[0] == 0 ? 1 : 0);
+                WriteOutput(0, (short) (values[0] == 0 ? 1 : 0));
             }
             else
             {
-                WriteOutput(0, values[0]);
+                WriteOutput(0, (short) values[0]);
             }
         }
     }

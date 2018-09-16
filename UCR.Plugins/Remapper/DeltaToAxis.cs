@@ -28,7 +28,7 @@ namespace HidWizards.UCR.Plugins.Remapper
         [PluginGui("Absolute Timeout", ColumnOrder = 2, RowOrder = 1)]
         public int AbsoluteTimeout { get; set; }
 
-        private long _currentValue;
+        private short _currentValue;
         private static Timer _absoluteModeTimer;
 
         public DeltaToAxis()
@@ -50,7 +50,7 @@ namespace HidWizards.UCR.Plugins.Remapper
 
         public override void Update(params long[] values)
         {
-            long value;
+            short value;
             if (values[1] == 1)
             {
                 //ToDo: It is impossible to distinguish between release of Reset button, and axis input. Review.
@@ -63,14 +63,13 @@ namespace HidWizards.UCR.Plugins.Remapper
                 if (Math.Abs(values[0]) < Deadzone) return;
                 if (AbsoluteMode)
                 {
-                    value = (long)(values[0] * AbsoluteSensitivity);
+                    value = Functions.ClampAxisRange((int) (values[0] * AbsoluteSensitivity));
                     SetAbsoluteTimerState(true);
                 }
                 else
                 {
-                    value = _currentValue + (long)(values[0] * RelativeSensitivity);
+                    value = Functions.ClampAxisRange((int) (_currentValue + (values[0] * RelativeSensitivity)));
                 }
-                value = Math.Min(Math.Max(value, Constants.AxisMinValue), Constants.AxisMaxValue);
             }
             _currentValue = value;
             WriteOutput(0, value);

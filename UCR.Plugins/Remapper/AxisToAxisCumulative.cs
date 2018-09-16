@@ -55,14 +55,12 @@ namespace HidWizards.UCR.Plugins.Remapper
 
         public override void Update(params long[] values)
         {
-            var value = values[0];
+            var value = (short)values[0];
 
             if (Invert) value = Functions.Invert(value);
             if (DeadZone != 0) value = _deadZoneHelper.ApplyRangeDeadZone(value);
             if (Sensitivity != 100) value = _sensitivityHelper.ApplyRangeSensitivity(value);
 
-            // Respect the axis min and max ranges.
-            value = Math.Min(Math.Max(value, Constants.AxisMinValue), Constants.AxisMaxValue);
             _currentInputValue = value;
 
             if (RelativeContinue)
@@ -138,8 +136,8 @@ namespace HidWizards.UCR.Plugins.Remapper
 
         private void RelativeUpdate()
         {
-            var value = (long)((_currentInputValue * (RelativeSensitivity / 100)) + _currentOutputValue);
-            value = Math.Min(Math.Max(value, Constants.AxisMinValue), Constants.AxisMaxValue);
+            var tmpValue = (int)((_currentInputValue * (RelativeSensitivity / 100)) + _currentOutputValue);
+            var value = Functions.ClampAxisRange(tmpValue);
             WriteOutput(0, value);
             _currentOutputValue = value;
         }

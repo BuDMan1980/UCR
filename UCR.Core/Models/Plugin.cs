@@ -118,7 +118,7 @@ namespace HidWizards.UCR.Core.Models
 
         #region Plugin methods
 
-        protected void WriteOutput(int number, long value)
+        protected void WriteOutput(int number, short value)
         {
             Outputs[number].WriteOutput(value);
         }

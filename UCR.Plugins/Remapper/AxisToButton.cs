@@ -28,10 +28,10 @@ namespace HidWizards.UCR.Plugins.Remapper
 
         public override void Update(params long[] values)
         {
-            var value = values[0];
+            var value = (short)values[0];
             if (Invert) value = Functions.Invert(value);
-            value = Math.Sign(_deadZoneHelper.ApplyRangeDeadZone(value));
-            switch (value)
+            var sign = Math.Sign(_deadZoneHelper.ApplyRangeDeadZone(value));
+            switch (sign)
             {
                 case 0:
                     WriteOutput(0, 0);

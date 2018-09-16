@@ -30,7 +30,7 @@ namespace HidWizards.UCR.Plugins.Remapper
         public int Max { get; set; }
 
         private static Timer _absoluteModeTimer;
-        private long _currentDelta;
+        private short _currentDelta;
         private float _scaleFactor;
         private readonly DeadZoneHelper _deadZoneHelper = new DeadZoneHelper();
         private readonly SensitivityHelper _sensitivityHelper = new SensitivityHelper();
@@ -48,7 +48,7 @@ namespace HidWizards.UCR.Plugins.Remapper
         #region Input Processing
         public override void Update(params long[] values)
         {
-            var value = values[0];
+            var value = (short)values[0];
             if (value != 0) value = _deadZoneHelper.ApplyRangeDeadZone(value);
             if (Invert) value = Functions.Invert(value);
             if (Sensitivity != 100) value = _sensitivityHelper.ApplyRangeSensitivity(value);
@@ -61,9 +61,9 @@ namespace HidWizards.UCR.Plugins.Remapper
             else
             {
                 var sign = Math.Sign(value);
-                
-                value = Functions.ClampAxisRange(value);
-                _currentDelta = (long)(Min + (Math.Abs(value) * _scaleFactor)) * sign;
+
+                var tmpValue = (int) (Min + (Math.Abs(value) * _scaleFactor)) * sign;
+                _currentDelta = Functions.ClampAxisRange(tmpValue);
                 //Debug.WriteLine($"New Delta: {_currentDelta}");
                 SetAbsoluteTimerState(true);
             }

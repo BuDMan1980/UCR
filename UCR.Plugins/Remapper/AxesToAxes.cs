@@ -54,7 +54,7 @@ namespace HidWizards.UCR.Plugins.Remapper
 
         public override void Update(params long[] values)
         {
-            var outputValues = new long[] {values[0], values[1]};
+            var outputValues = new short[] {(short) values[0], (short) values[1]};
             if (DeadZone != 0)
             {
                 if (CircularDz)
@@ -72,8 +72,11 @@ namespace HidWizards.UCR.Plugins.Remapper
             {
                 if (Linear)
                 {
-                    outputValues[0] = (long)(outputValues[0] * _linearSenstitivityScaleFactor);
-                    outputValues[1] = (long)(outputValues[1] * _linearSenstitivityScaleFactor);
+                    var tmpValues = new int[2];
+                    tmpValues[0] = (int)(outputValues[0] * _linearSenstitivityScaleFactor);
+                    tmpValues[1] = (int)(outputValues[1] * _linearSenstitivityScaleFactor);
+                    outputValues[0] = Functions.ClampAxisRange(tmpValues[0]);
+                    outputValues[1] = Functions.ClampAxisRange(tmpValues[1]);
                 }
                 else
                 {
@@ -82,11 +85,14 @@ namespace HidWizards.UCR.Plugins.Remapper
                 }
             }
 
-            outputValues[0] = Functions.ClampAxisRange(outputValues[0]);
-            outputValues[1] = Functions.ClampAxisRange(outputValues[1]);
+            //var outputValues = new short[2];
+            outputValues[0] = Functions.ClampAxisRange((int) outputValues[0]);
+            outputValues[1] = Functions.ClampAxisRange((int) outputValues[1]);
 
             if (InvertX) outputValues[0] = Functions.Invert(outputValues[0]);
             if (InvertY) outputValues[1] = Functions.Invert(outputValues[1]);
+
+
 
             WriteOutput(0, outputValues[0]);
             WriteOutput(1, outputValues[1]);

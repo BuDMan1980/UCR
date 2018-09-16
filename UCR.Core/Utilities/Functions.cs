@@ -12,20 +12,20 @@ namespace HidWizards.UCR.Core.Utilities
         /// </summary>
         /// <param name="value">The raw value of the axis</param>
         /// <returns>The inverted value of the axis</returns>
-        public static long Invert(long value)
+        public static short Invert(short value)
         {
             if (value == 0) return 0;
-            if (value >= Constants.AxisMaxValue)
+            if (value == short.MaxValue)
             {
-                return Constants.AxisMinValue;
+                return short.MinValue;
             }
 
-            if (value <= Constants.AxisMinValue)
+            if (value <= short.MinValue)
             {
-                return Constants.AxisMaxValue;
+                return short.MaxValue;
             }
 
-            return value * -1;
+            return (short) (value * -1);
         }
 
         /// <summary>
@@ -33,11 +33,11 @@ namespace HidWizards.UCR.Core.Utilities
         /// </summary>
         /// <param name="value">The raw axis value</param>
         /// <returns>The clamped axis value</returns>
-        public static long ClampAxisRange(long value)
+        public static short ClampAxisRange(int value)
         {
-            if (value == 0) return value;
+            if (value == 0) return 0;
             if (value <= Constants.AxisMinValue) return Constants.AxisMinValue;
-            return value >= Constants.AxisMaxValue ? Constants.AxisMaxValue : value;
+            return value >= Constants.AxisMaxValue ? short.MaxValue : (short)value;
         }
 
         /// <summary>
@@ -47,28 +47,28 @@ namespace HidWizards.UCR.Core.Utilities
         /// <param name="axis">The value of the axis</param>
         /// <param name="positiveRange">Set to true for the high half, else the low half</param>
         /// <returns>The new value for the split axis. If axis is negative and high is specified, returns 0. If axis is positive and low is specified, returns 0</returns>
-        public static long SplitAxis(long axis, bool positiveRange)
+        public static short SplitAxis(short axis, bool positiveRange)
         {
-            long value;
-            if (axis == 0) return Constants.AxisMinValue;
+            int value;
+            if (axis == 0) return short.MinValue;
             if (positiveRange)
             {
-                if (axis < 0) return Constants.AxisMinValue;
+                if (axis < 0) return short.MinValue;
                 value = axis;
-                if (value == Constants.AxisMaxValue) value++;
+                if (value == short.MaxValue) value++;
             }
             else
             {
-                if (axis > 0) return Constants.AxisMinValue;
+                if (axis > 0) return short.MinValue;
                 value = axis * -1;
             }
 
             value *= 2;
-            value += Constants.AxisMinValue;
+            value += short.MinValue;
 
             if (value == 32768) value = 32767;
 
-            return value;
+            return (short) value;
         }
 
     }
