@@ -23,8 +23,8 @@ namespace HidWizards.UCR.ViewModels.ProfileViewModels
             }
         }
 
-        private long _currentValue;
-        public long CurrentValue
+        private short _currentValue;
+        public short CurrentValue
         {
             get => _currentValue;
             set

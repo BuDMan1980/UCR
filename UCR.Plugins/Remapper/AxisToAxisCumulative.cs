@@ -38,8 +38,8 @@ namespace HidWizards.UCR.Plugins.Remapper
         private readonly DeadZoneHelper _deadZoneHelper = new DeadZoneHelper();
         private readonly SensitivityHelper _sensitivityHelper = new SensitivityHelper();
 
-        private long _currentOutputValue;
-        private long _currentInputValue;
+        private short _currentOutputValue;
+        private short _currentInputValue;
         private readonly object _threadLock = new object();
 
         private Thread _relativeThread;

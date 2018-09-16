@@ -10,7 +10,7 @@ namespace HidWizards.UCR.Views.Controls.preview
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var range = (long) value;
+            var range = (short) value;
             return 50.0 + ((double)range / Constants.AxisMaxValue) * 50;
         }
 

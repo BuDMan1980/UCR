@@ -10,7 +10,7 @@ namespace HidWizards.UCR.Views.Controls.preview
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var pressed = (long) value;
+            var pressed = (short) value;
             return 100.0 * pressed;
         }
 

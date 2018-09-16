@@ -36,7 +36,7 @@ namespace HidWizards.UCR.Tests.UtilityTests.HelperTests
         [TestCase(Constants.AxisMinValue, 200, ExpectedResult = Constants.AxisMinValue, TestName = "SensitivityHelper (200, Linear): Min returns Min")]
         [TestCase(16384, 200, ExpectedResult = Constants.AxisMaxValue, TestName = "SensitivityHelper (200, Linear): Half (Positive) Deflection returns Max")]
         [TestCase(-16384, 200, ExpectedResult = Constants.AxisMinValue, TestName = "SensitivityHelper (200, Linear): Half (Negative) Deflection returns Min")]
-        public long SensitivityHelperValueLinearTests(short inputValue, int percentage)
+        public short SensitivityHelperValueLinearTests(short inputValue, int percentage)
         {
             var helper = new SensitivityHelper { Percentage = percentage, IsLinear = true};
             return helper.ApplyRangeSensitivity(inputValue);

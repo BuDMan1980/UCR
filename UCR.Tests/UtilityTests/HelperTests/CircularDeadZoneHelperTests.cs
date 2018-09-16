@@ -97,7 +97,7 @@ namespace HidWizards.UCR.Tests.UtilityTests.HelperTests
         {
             var helper = new CircularDeadZoneHelper { Percentage = percentage };
             var result = helper.ApplyRangeDeadZone(new short[] { -16383, -16383 });
-            Assert.AreNotEqual(new long[] { 0, 0 }, result);
+            Assert.AreNotEqual(new short[] { 0, 0 }, result);
         }
     }
 }
