@@ -18,10 +18,10 @@ namespace HidWizards.UCR.Plugins.State
 
         public override void Update(params short[] values)
         {
-            long value;
+            short value;
             if (Invert)
             {
-                value = values[0] == 0 ? 1 : 0;
+                value = (short) (values[0] == 0 ? 1 : 0);
             }
             else
             {
