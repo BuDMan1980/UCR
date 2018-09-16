@@ -59,7 +59,8 @@ namespace HidWizards.UCR.Core.Models
             Multiplexer = new List<CallbackMultiplexer>();
             for (var i = 0; i < DeviceBindings.Count; i++)
             {
-                var cm = new CallbackMultiplexer(InputCache, i, Update);
+                //var cm = new CallbackMultiplexer(InputCache, i, Update);
+                var cm = new CallbackMultiplexer(InputCache, i, UpdateNew);
                 Multiplexer.Add(cm);
                 DeviceBindings[i].Callback = cm.Update;
                 DeviceBindings[i].CurrentValue = 0;
@@ -94,6 +95,17 @@ namespace HidWizards.UCR.Core.Models
                 if (plugin.State == Guid.Empty || Profile.GetRuntimeState(plugin.State))
                 {
                     plugin.Update(InputCache.ToArray());
+                }
+            }
+        }
+
+        public void UpdateNew(int index)
+        {
+            foreach (var plugin in Plugins)
+            {
+                if (plugin.State == Guid.Empty || Profile.GetRuntimeState(plugin.State))
+                {
+                    plugin.Update(InputCache.ToArray()); // Index can now be passed in here
                 }
             }
         }
